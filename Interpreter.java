@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.Scanner;
 
 public class Interpreter {
   
@@ -12,7 +13,9 @@ public class Interpreter {
   
   public void parse () {
     
+    Scanner scan = new Scanner(System.in);
     
+    while (
     
   }
   
