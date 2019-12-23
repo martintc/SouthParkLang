@@ -5,17 +5,19 @@ public class Interpreter {
   
   private Stack<Operator> operators;
   private Stack<Operands> operands;
+  private Scanner scan;
   
   public Interpreter () {
            operators = new Stack<>();
            operands = new Stack<>();
+           scan = new Scanner(System.in);
   }
   
-  public void parse () {
+  public void parseFile () {
     
-    Scanner scan = new Scanner(System.in);
-    
-    while (
+   while(scan.hasNextLine()) {
+     
+   }
     
   }
   
