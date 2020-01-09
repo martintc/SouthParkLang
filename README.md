@@ -23,9 +23,16 @@ Important to note about this language currently. Mathematical operations are con
 
 One last important note for this language in the current state. There does not currently exist much checking of the langauge. So, mistypes and errors in logic will break the program and not notify the user who is operating the interpreter. 
 
+# Interactive Interpreter
+
+To use the interactive interpreter, just invoke the interpreter without any arguements. However, currently, the interactive interpreter is for one-liners.
+
+# Interpret from file
+
+To interpret from file, invoke interpreter with an argument that is the path and file name of the source file. 
+
 # TO-DO
 - Write documentation
-- Create interpreter interface to interpret from file
 - Clean up Interpreter code
 - Add If-then-else feature
 - Add while loop feature
