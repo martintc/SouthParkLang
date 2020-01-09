@@ -1,6 +1,10 @@
 # SouthParkLang
 A southpark inspired language
 
+# Documentation
+
+https://toddmartin.dev/docs/southparklang/
+
 
 # Use
 Right now, SouthParkLang is crude and very basic. It is a functional language implementeded in Java. The java runtime environment is needed to run the interpreter for the program.
@@ -36,7 +40,6 @@ To interpret from file, invoke interpreter with an argument that is the path and
 There is not an ability to use constant values. Currently the only constant value is "treeFiddy," which give the value of 350.
 
 # TO-DO
-- Write documentation
 - Clean up Interpreter code
 - Add If-then-else feature
 - Add while loop feature
