@@ -11,6 +11,7 @@ public class Interpreter {
 	private Scanner scan;
 	private int operandsThisFunction;
 	private Stack<Function> functions;
+	private Function currentFunction;
 
 	/*
 	 * Constructor used when in interactive mode
@@ -85,8 +86,8 @@ public class Interpreter {
 	public void interpretFromTerminal () {
 		System.out.print(">> ");
 		String currentToken;
-		
-		Function currentFunction = new Function(Functions.START);
+
+		currentFunction = new Function(Functions.START);
 		
 		while (scan.hasNext()) {
 			currentToken = scan.next();
@@ -127,14 +128,7 @@ public class Interpreter {
 						continue;
 					}
 				} else {
-					try {
-						// System.out.println("Current Operator: " + currentToken); // Line of Test Code
-						currentFunction.operands.push(currentToken);
-						// currentFunction.addOperands(currentToken);
-					} catch (Exception e) {
-						System.out.println("Error"); // test code
-						System.exit(0);
-					}
+					pushOperand(currentToken);
 				}
 			}
 		}
@@ -144,8 +138,9 @@ public class Interpreter {
 	 * Interpret source code from a file
 	 */
 	public void interpretFromFile () {
-		Function currentFunction = new Function(Functions.START);
 		String currentToken;
+
+		currentFunction = new Function(Functions.START);
 		
 		while (scan.hasNext()) {
 			currentToken = scan.next();
@@ -186,15 +181,8 @@ public class Interpreter {
 						continue;
 					}
 				} else {
-					try {
-						// System.out.println("Current Operator: " + currentToken); // Line of Test Code
-						currentFunction.operands.push(currentToken);
-						// currentFunction.addOperands(currentToken);
-					} catch (Exception e) {
-						System.out.println("Error"); // test code
-						System.exit(0);
-					}
-				}
+					pushOperand(currentToken);
+				}	
 			}
 		}
 	}		
@@ -222,4 +210,12 @@ public class Interpreter {
 			}
 		}
 	}*/ 	
+
+	private void pushOperand (String op) {
+		if (Constants.getConstantsToken(op) != Constants.NOT_A_CONSTANT) {
+			currentFunction.operands.push(Constants.getValueOfConstant(Constants.getConstantsToken(op)));
+		} else {
+			currentFunction.operands.push(op);
+		}
+	}
 }
