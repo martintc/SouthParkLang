@@ -21,7 +21,7 @@ public class Interpreter {
 	/*
 	 * Interprets from a command line interface in the terminal
 	 */ 
-	public void interpretFromTerminal () {
+	/* public void interpretFromTerminal () {
 	System.out.print(">> ");
 		scan = new Scanner(System.in); // read input from terminal
 		String currentToken;
@@ -53,7 +53,7 @@ public class Interpreter {
 				}
 			}
 		}
-	}
+	} */ // code to be deprecated
 	
 	public void interpretFromTerminalNew () { // testing
 		System.out.print(">> ");
