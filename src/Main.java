@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 /*
  * Main.java
  * 
@@ -21,12 +23,16 @@
  * 
  */
 
-
 public class Main {
-	
-	public static void main (String[] args) {
-		Interpreter i = new Interpreter();
-		i.interpretFromTerminal();
+
+	public static void main(String[] args) throws FileNotFoundException {
+		if (args.length == 0) {
+			Interpreter in = new Interpreter();
+			in.interpretFromTerminal();
+		} else {
+			Interpreter in = new Interpreter(args[0]);
+			in.interpretFromFile();
+		}
 	}
 }
 
