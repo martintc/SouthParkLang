@@ -55,6 +55,9 @@ public class Interpreter {
 		}
 	} */ // code to be deprecated
 	
+	/*
+	 * Interactive interpreter
+	 */
 	public void interpretFromTerminal () {
 		System.out.print(">> ");
 		scan = new Scanner(System.in);
@@ -113,8 +116,13 @@ public class Interpreter {
 			}
 		}
 	}
-					
-					
+	
+	/*
+	 * Interpret source code from a file
+	 */
+	public void interpretFromFile (String sourceFile) {
+
+	}		
 	
 	/*
 	 * Evaluates the function current on top of the stack
