@@ -2,6 +2,7 @@ import java.util.Stack;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 public class Interpreter {
 
@@ -9,12 +10,14 @@ public class Interpreter {
 	private Scanner scan;
 	private Stack<Function> functions;
 	private Function currentFunction;
+	private HashMap<String, String> vars;
 
 	/*
 	 * Constructor used when in interactive mode
 	 */
 	public Interpreter() {
 		functions = new Stack<>();
+		vars = new HashMap<>();
 
 		scan = new Scanner(System.in);
 	}
@@ -31,6 +34,7 @@ public class Interpreter {
 		}
 
 		functions = new Stack<>();
+		vars = new HashMap<>();
 	}
 	
 	
@@ -55,13 +59,19 @@ public class Interpreter {
 						}
 					}*/
 					// System.out.println("Return Value: " + currentFunction.sendToEvaluator().toString());
-					String newOperand = currentFunction.sendToEvaluator().toString();
+					if (currentFunction.fx != Functions.SET_VAR) {
+						String newOperand = currentFunction.sendToEvaluator().toString();
 					// System.out.println(newOperand);
-					if (!functions.isEmpty() || currentFunction.fx == Functions.START) {
+						if (!functions.isEmpty() || currentFunction.fx == Functions.START) {
 						currentFunction = functions.pop();
 						// System.out.println(newOperand);
 						currentFunction.addOperands(newOperand);
 						continue;
+						}
+					}
+					if (currentFunction.fx == Functions.SET_VAR) {
+						vars.put(currentFunction.operands.pop(), currentFunction.operands.pop());
+						System.out.println(vars.values()); // test code 
 					}
 					System.out.println("DONE");
 					System.out.println(">> ");
@@ -108,8 +118,8 @@ public class Interpreter {
 						}
 					}*/
 					// System.out.println("Return Value: " + currentFunction.sendToEvaluator().toString());
-					String newOperand = currentFunction.sendToEvaluator().toString();
-					// System.out.println(newOperand);
+					String newOperand = currentFunction.sendToEvaluator().toString(); // KEEP!
+					System.out.println(newOperand);
 					if (!functions.isEmpty() || currentFunction.fx == Functions.START) {
 						currentFunction = functions.pop();
 						// System.out.println(newOperand);

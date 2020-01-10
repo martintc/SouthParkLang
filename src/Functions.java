@@ -5,10 +5,11 @@ public enum Functions {
 	PRINT,
 	QUIT,
 	END_FUNCTION,
-	ADD, // to be added
-	SUBTRACT, // to be added
-	MULTIPLY, // to be added
-	DIVIDE, // to be added
+	ADD,
+	SUBTRACT,
+	MULTIPLY, 
+	DIVIDE, 
+	SET_VAR,
 	DOES_NOT_EXIST
 	;
 	
@@ -32,6 +33,8 @@ public enum Functions {
 			return Functions.MULTIPLY;
 		case "/" :
 			return Functions.DIVIDE;
+		case "member" :
+			return Functions.SET_VAR;
 		default:
 			return Functions.DOES_NOT_EXIST;
 		}

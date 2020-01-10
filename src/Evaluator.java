@@ -5,7 +5,7 @@ public class Evaluator {
 	public static String evaluate (Functions fx, String o[]) {
 		String r = "";
 		if (fx == Functions.ADD || fx == Functions.SUBTRACT || fx == Functions.MULTIPLY || fx == Functions.DIVIDE) {
-			r = Double.toString(Math.convertAndEval(fx, o));
+			return Double.toString(Math.convertAndEval(fx, o));
 			// System.out.print("r"  + r); // test code
 		} else if (fx == Functions.PRINT) {
 			for (String s : o) {
