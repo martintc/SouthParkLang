@@ -1,19 +1,19 @@
 public enum Constants {
 
-    TREEFIFTY,
+    TREEFIDDY,
     NOT_A_CONSTANT;
 
-    public Constants getConstantsToken (String s) {
+    public static Constants getConstantsToken (String s) {
         switch (s) {
-            case "treeFifty" :
-                return TREEFIFTY;
+            case "treeFiddy" :
+                return Constants.TREEFIDDY;
             default :
-                return NOT_A_CONSTANT;
+                return Constants.NOT_A_CONSTANT;
         }
     }
 
-    public String getValueOfConstant (Constants c) {
-        if (c == Constants.TREEFIFTY) {
+    public static String getValueOfConstant (Constants c) {
+        if (c == Constants.TREEFIDDY) {
             return "350";
         } else {
             return null;
