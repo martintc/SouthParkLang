@@ -31,6 +31,10 @@ To use the interactive interpreter, just invoke the interpreter without any argu
 
 To interpret from file, invoke interpreter with an argument that is the path and file name of the source file. 
 
+# Constants
+
+There is not an ability to use constant values. Currently the only constant value is "treeFiddy," which give the value of 350.
+
 # TO-DO
 - Write documentation
 - Clean up Interpreter code
