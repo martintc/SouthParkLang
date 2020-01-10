@@ -1,23 +1,47 @@
 import java.util.Stack;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Interpreter {
-	
+
 	// instance variables and datastructures
 	private Stack<String> operands;
 	private Stack<Functions> operators;
 	private Scanner scan;
 	private int operandsThisFunction;
 	private Stack<Function> functions;
-	
-	public Interpreter () {
+
+	/*
+	 * Constructor used when in interactive mode
+	 */
+	public Interpreter() {
 		operands = new Stack<>();
 		operators = new Stack<>();
-		
+
+		operandsThisFunction = 0;
+		functions = new Stack<>();
+
+		scan = new Scanner(System.in);
+	}
+
+	/*
+	 * Constructor used when interpreting from source file
+	 */
+	public Interpreter(String sourceFile) throws FileNotFoundException {
+		try {
+			scan = new Scanner(new File(sourceFile));
+		} catch (FileNotFoundException e) {
+			System.err.print("Source file not found! \n Exiting.....");
+			System.exit(0);
+		}
+
+		operands = new Stack<>();
+		operators = new Stack<>();
+
 		operandsThisFunction = 0;
 		functions = new Stack<>();
 	}
-	
 	/*
 	 * Interprets from a command line interface in the terminal
 	 */ 
@@ -60,7 +84,6 @@ public class Interpreter {
 	 */
 	public void interpretFromTerminal () {
 		System.out.print(">> ");
-		scan = new Scanner(System.in);
 		String currentToken;
 		
 		Function currentFunction = new Function(Functions.START);
@@ -120,8 +143,60 @@ public class Interpreter {
 	/*
 	 * Interpret source code from a file
 	 */
-	public void interpretFromFile (String sourceFile) {
-
+	public void interpretFromFile () {
+		Function currentFunction = new Function(Functions.START);
+		String currentToken;
+		
+		while (scan.hasNext()) {
+			currentToken = scan.next();
+			Functions fx = Functions.checkForToken(currentToken);
+			if (fx != Functions.DOES_NOT_EXIST) {
+				if (fx == Functions.END_FUNCTION) { // filled with test code current
+					/* System.out.println(currentFunction.fx);
+					if (!currentFunction.operands.isEmpty()) {
+						for (String s : currentFunction.operands) {
+							System.out.print(s);
+						}
+					}*/
+					// System.out.println("Return Value: " + currentFunction.sendToEvaluator().toString());
+					String newOperand = currentFunction.sendToEvaluator().toString();
+					// System.out.println(newOperand);
+					if (!functions.isEmpty() || currentFunction.fx == Functions.START) {
+						currentFunction = functions.pop();
+						// System.out.println(newOperand);
+						currentFunction.addOperands(newOperand);
+						continue;
+					}
+					System.out.println("DONE");
+					System.out.println(">> ");
+				} else {
+					try {
+						currentFunction.setFunction(fx);
+					} catch (Exception e) {
+						System.exit(0);
+					}
+				}
+			} else {
+				if (currentToken.equals("(")) {
+					if (!functions.isEmpty() || currentFunction.fx == Functions.START) {
+						functions.push(currentFunction);
+						currentFunction = new Function();
+					} else if (functions.isEmpty()) {
+						functions.push(currentFunction);
+						continue;
+					}
+				} else {
+					try {
+						// System.out.println("Current Operator: " + currentToken); // Line of Test Code
+						currentFunction.operands.push(currentToken);
+						// currentFunction.addOperands(currentToken);
+					} catch (Exception e) {
+						System.out.println("Error"); // test code
+						System.exit(0);
+					}
+				}
+			}
+		}
 	}		
 	
 	/*
