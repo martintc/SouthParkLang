@@ -6,10 +6,7 @@ import java.io.FileNotFoundException;
 public class Interpreter {
 
 	// instance variables and datastructures
-	private Stack<String> operands;
-	private Stack<Functions> operators;
 	private Scanner scan;
-	private int operandsThisFunction;
 	private Stack<Function> functions;
 	private Function currentFunction;
 
@@ -17,10 +14,6 @@ public class Interpreter {
 	 * Constructor used when in interactive mode
 	 */
 	public Interpreter() {
-		operands = new Stack<>();
-		operators = new Stack<>();
-
-		operandsThisFunction = 0;
 		functions = new Stack<>();
 
 		scan = new Scanner(System.in);
@@ -37,48 +30,9 @@ public class Interpreter {
 			System.exit(0);
 		}
 
-		operands = new Stack<>();
-		operators = new Stack<>();
-
-		operandsThisFunction = 0;
 		functions = new Stack<>();
 	}
-	/*
-	 * Interprets from a command line interface in the terminal
-	 */ 
-	/* public void interpretFromTerminal () {
-	System.out.print(">> ");
-		scan = new Scanner(System.in); // read input from terminal
-		String currentToken;
-		while (scan.hasNextLine()) {
-			currentToken = scan.next();
-			Functions fx = Functions.checkForToken(currentToken);
-			if (fx != Functions.DOES_NOT_EXIST) { // if not a function, must be an operator
-				if ( fx == Functions.END_FUNCTION) { // function ended, evaluate
-					// evaluate();
-					String operandsToEval[] = new String[operandsThisFunction];
-					for (int i = 0; i < operandsThisFunction; i++) {
-						operandsToEval[i] = operands.pop();
-					}
-					operandsThisFunction = 0;
-					operands.push(Evaluator.evaluate(operators.pop(), operandsToEval));
-					System.out.print(">> ");
-					continue;
-				}
-				operators.push(fx);
-				// System.out.println(fx); // test statement - works
-			} else {
-				if (currentToken.equals("(")) { // ignore character
-					// System.out.println(currentToken); // test statement
-				continue;
-				} else {
-					operands.push(currentToken);
-					operandsThisFunction++; // counts operators within this function
-					// System.out.println(currentToken); // test statement
-				}
-			}
-		}
-	} */ // code to be deprecated
+	
 	
 	/*
 	 * Interactive interpreter
@@ -186,30 +140,7 @@ public class Interpreter {
 			}
 		}
 	}		
-	
-	/*
-	 * Evaluates the function current on top of the stack
-	 * Will be pushed off into another class
-	 */ 
-	/*public void evaluate() {
-		Functions currentOperator = operators.pop();
-		// System.out.println(currentOperator); // test statement
-		if (currentOperator == Functions.QUIT) { // does not take operators
-			System.out.println("Killing kenny......");
-			System.exit(0);
-		} else {
-			if (currentOperator == Functions.PRINT) {
-				String currentOperand = "";
-				while (operandsThisFunction > 0) {
-					currentOperand = operands.pop() + currentOperand;
-					operandsThisFunction--;
-				}
-				System.out.println(currentOperand);
-			} else {
-				System.out.println("Error");
-			}
-		}
-	}*/ 	
+		
 
 	private void pushOperand (String op) {
 		if (Constants.getConstantsToken(op) != Constants.NOT_A_CONSTANT) {
