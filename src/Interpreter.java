@@ -55,7 +55,7 @@ public class Interpreter {
 		}
 	} */ // code to be deprecated
 	
-	public void interpretFromTerminalNew () { // testing
+	public void interpretFromTerminal () {
 		System.out.print(">> ");
 		scan = new Scanner(System.in);
 		String currentToken;
